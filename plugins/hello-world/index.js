@@ -3,12 +3,11 @@ function HelloWorldPlugin(options) {
     // 使用 options 设置插件实例……
 }
 
-HelloWorldPlugin.prototype.apply = function(compiler) {
-    const that = this;
-    compiler.plugin('done', function(compilation, callback) {
-        console.log('Hello World!', that.config);
-        console.log('Hello compilation!', compilation);
-        callback && callback()
+HelloWorldPlugin.prototype.apply = function (compiler) {
+    compiler.plugin("compilation", function (compilation) {
+        compilation.plugin("optimize", function (e) {
+            console.log("Assets are being optimized.", compilation);
+        });
     });
 };
   
